@@ -21,9 +21,8 @@
             position: relative;
         }
 
-        /* Background com imagem e overlay amarelo */
-        body::before {
-            content: '';
+        /* Background com imagem */
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,18 +32,17 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.06;
+            opacity: 0.15;
             z-index: -2;
         }
 
-        body::after {
-            content: '';
+        .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, #000000 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.7) 0%, #000000 100%);
             z-index: -1;
         }
 
@@ -56,7 +54,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
@@ -87,7 +85,7 @@
             }
         }
 
-        /* Scrollbar personalizada - Amarela */
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -95,11 +93,8 @@
             background: #000000;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
             background: #FFD700;
+            border-radius: 10px;
         }
 
         /* Dashboard Layout */
@@ -107,6 +102,8 @@
             display: flex;
             min-height: 100vh;
             animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes fadeIn {
@@ -125,24 +122,19 @@
             width: 280px;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 215, 0, 0.15);
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
             position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
             z-index: 10;
             overflow-y: auto;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .sidebar:hover {
-            background: rgba(0, 0, 0, 0.98);
-            border-right-color: rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
         }
 
         .sidebar-header {
             padding: 30px 24px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             margin-bottom: 24px;
             animation: slideInLeft 0.5s ease-out;
         }
@@ -182,15 +174,13 @@
             background-clip: text;
             color: transparent;
             font-family: 'Montserrat', sans-serif;
-            letter-spacing: -0.5px;
         }
         .logo span { 
             font-size: 9px; 
-            color: rgba(255, 215, 0, 0.5); 
+            color: rgba(255, 215, 0, 0.6); 
             display: block; 
             margin-top: 2px;
             letter-spacing: 2px;
-            font-weight: 600;
         }
 
         .nav-menu { padding: 0 16px; }
@@ -202,7 +192,7 @@
             margin-bottom: 8px;
             border-radius: 14px;
             color: rgba(255, 255, 255, 0.6);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
@@ -217,7 +207,6 @@
             background: rgba(255, 215, 0, 0.15); 
             color: #FFD700;
             border-left: 3px solid #FFD700;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
         }
 
         /* Main Content */
@@ -245,23 +234,21 @@
             align-items: center;
             margin-bottom: 32px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
         .page-title h1 { 
             font-size: 32px; 
             font-weight: 900; 
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-family: 'Montserrat', sans-serif;
-            letter-spacing: -1px;
         }
         .page-title p { 
             font-size: 13px; 
             color: rgba(255, 215, 0, 0.6); 
             margin-top: 4px;
-            font-family: 'Inter', sans-serif;
         }
         .status-badge {
             display: flex;
@@ -275,8 +262,8 @@
             animation: glow 2s infinite;
         }
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); border-color: rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); border-color: rgba(255, 215, 0, 0.6); }
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
         }
         .status-dot {
             width: 8px;
@@ -294,10 +281,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        .status-badge span {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-        }
 
         /* Stats Cards */
         .stats-grid {
@@ -309,24 +292,24 @@
         .stat-card {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 20px;
             padding: 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             animation: fadeInUp 0.5s ease-out backwards;
         }
         .stat-card:nth-child(1) { animation-delay: 0.1s; }
         .stat-card:nth-child(2) { animation-delay: 0.2s; }
         .stat-card:nth-child(3) { animation-delay: 0.3s; }
         .stat-card:hover { 
-            border-color: rgba(255, 215, 0, 0.4); 
+            border-color: #FFD700; 
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
         }
         .stat-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+            background: rgba(255, 215, 0, 0.1);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -346,7 +329,6 @@
             color: rgba(255, 215, 0, 0.6); 
             text-transform: uppercase; 
             letter-spacing: 1.5px;
-            font-family: 'Inter', sans-serif;
             font-weight: 600;
         }
 
@@ -354,15 +336,14 @@
         .token-card {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 24px;
             padding: 28px;
             margin-bottom: 24px;
             transition: all 0.3s;
         }
         .token-card:hover {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.05);
+            border-color: #FFD700;
         }
         .token-label {
             display: flex;
@@ -380,10 +361,10 @@
             width: 100%;
             padding: 14px 16px;
             background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 14px;
             color: #FFFFFF;
-            font-family: 'Inter', monospace;
+            font-family: monospace;
             font-size: 13px;
             resize: vertical;
             margin-bottom: 16px;
@@ -408,26 +389,23 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
         }
         .btn-primary:hover { 
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
         .btn-secondary { 
-            background: linear-gradient(135deg, #1a1a1a, #0a0a0a); 
+            background: rgba(255, 215, 0, 0.1); 
             color: #FFD700; 
             border: 1px solid rgba(255, 215, 0, 0.3); 
         }
         .btn-secondary:hover { 
-            background: linear-gradient(135deg, #2a2a2a, #1a1a1a); 
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 215, 0, 0.2);
         }
         .btn-success { 
             background: linear-gradient(135deg, #FFD700, #FFA500); 
             color: #000000;
-            font-weight: 800;
         }
 
         /* Quests Section */
@@ -458,16 +436,15 @@
         .quest-item {
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s;
             animation: scaleIn 0.4s ease-out backwards;
         }
-        .quest-item:nth-child(n) { animation-delay: calc(0.05s * var(--i, 1)); }
         .quest-item:hover { 
             border-color: #FFD700; 
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15);
         }
         @keyframes scaleIn {
@@ -510,7 +487,6 @@
             color: #FFD700;
             font-weight: 700;
             letter-spacing: 1px;
-            font-family: 'Inter', sans-serif;
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
@@ -538,7 +514,6 @@
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 14px;
             line-height: 1.5;
-            font-family: 'Inter', sans-serif;
         }
         .quest-reward {
             display: flex;
@@ -566,18 +541,12 @@
             width: 0%;
             transition: width 0.5s ease;
             border-radius: 10px;
-            animation: shimmer 1.5s infinite;
-        }
-        @keyframes shimmer {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
         }
         .quest-btn {
             width: 100%;
             padding: 12px;
             background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 12px;
             color: #FFD700;
             font-size: 13px;
@@ -588,20 +557,17 @@
             justify-content: center;
             gap: 8px;
             transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
         }
         .quest-btn:hover { 
             background: rgba(255, 215, 0, 0.2);
             border-color: #FFD700;
-            transform: scale(1.02);
-            color: #FFD700;
         }
 
         /* Console */
         .console {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 20px;
             margin-top: 32px;
             overflow: hidden;
@@ -611,7 +577,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 24px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
         }
         .console-header span {
             display: flex;
@@ -628,7 +594,7 @@
             padding: 20px;
             max-height: 250px;
             overflow-y: auto;
-            font-family: 'Inter', monospace;
+            font-family: monospace;
             font-size: 12px;
         }
         .log-entry {
@@ -657,7 +623,6 @@
             text-align: center;
             padding: 60px;
             color: rgba(255, 215, 0, 0.5);
-            font-family: 'Inter', sans-serif;
         }
         .hidden { display: none !important; }
 
@@ -668,7 +633,7 @@
             left: 0;
             right: 0;
             padding: 20px;
-            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
             background: rgba(0, 0, 0, 0.95);
         }
         .user-avatar-sidebar {
@@ -681,20 +646,20 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+            background: rgba(255, 215, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
         .avatar-icon i { width: 22px; height: 22px; color: #FFD700; }
-        .user-name-sidebar { font-size: 14px; font-weight: 600; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+        .user-name-sidebar { font-size: 14px; font-weight: 600; color: #FFFFFF; }
         .user-id-sidebar { font-size: 10px; color: rgba(255, 215, 0, 0.5); }
         .logout-btn {
             width: 100%;
             padding: 10px;
             background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 12px;
             color: #FFD700;
             display: flex;
@@ -708,11 +673,9 @@
         }
         .logout-btn:hover { 
             background: rgba(255, 215, 0, 0.2);
-            border-color: #FFD700;
-            transform: scale(1.02);
         }
 
-        /* Loading Overlay */
+        /* Loading */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -726,6 +689,10 @@
             align-items: center;
             flex-direction: column;
             gap: 20px;
+            display: none;
+        }
+        .loading-overlay.active {
+            display: flex;
         }
         .spinner {
             width: 60px;
@@ -740,7 +707,6 @@
         }
         .loading-overlay div {
             color: #FFD700;
-            font-family: 'Inter', sans-serif;
             font-weight: 600;
         }
 
@@ -751,6 +717,9 @@
     </style>
 </head>
 <body>
+    <!-- Background -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
     <div class="falling-dots" id="fallingDots"></div>
 
     <div class="dashboard">
@@ -759,7 +728,10 @@
             <div class="sidebar-header">
                 <div class="logo">
                     <i data-lucide="zap"></i>
-                    <div><h2>VIBEQUESTS</h2><span>PREMIUM DASHBOARD</span></div>
+                    <div>
+                        <h2>VIBEQUESTS</h2>
+                        <span>PREMIUM DASHBOARD</span>
+                    </div>
                 </div>
             </div>
             <div class="nav-menu">
@@ -793,12 +765,12 @@
         <div class="main-content">
             <div class="main-header">
                 <div class="page-title">
-                    <h1>VibeQuests</h1>
+                    <h1>VIBEQUESTS</h1>
                     <p>Gerencie suas missões do Discord com estilo</p>
                 </div>
                 <div class="status-badge">
                     <div class="status-dot" id="statusDot"></div>
-                    <span id="statusText" style="font-family: 'Inter', sans-serif;">Verificando</span>
+                    <span id="statusText">Verificando</span>
                 </div>
             </div>
 
@@ -839,26 +811,26 @@
     </div>
 
     <!-- Loading -->
-    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+    <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div>Processando...</div>
     </div>
 
     <script>
-        // Gerar bolinhas caindo amarelas
+        // Gerar bolinhas caindo
         function createFallingDots() {
             const container = document.getElementById('fallingDots');
-            const numberOfDots = 120;
+            const numberOfDots = 150;
             
             for (let i = 0; i < numberOfDots; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
-                const size = Math.random() * 5 + 2;
+                const size = Math.random() * 4 + 2;
                 dot.style.width = `${size}px`;
                 dot.style.height = `${size}px`;
                 dot.style.left = `${Math.random() * 100}%`;
-                dot.style.animationDuration = `${Math.random() * 10 + 4}s`;
-                dot.style.animationDelay = `${Math.random() * 15}s`;
+                dot.style.animationDuration = `${Math.random() * 8 + 4}s`;
+                dot.style.animationDelay = `${Math.random() * 10}s`;
                 dot.style.opacity = Math.random() * 0.6 + 0.2;
                 container.appendChild(dot);
             }
@@ -924,7 +896,7 @@
                 } catch(e) {
                     statusDot.classList.remove('online');
                     statusText.innerText = 'API Offline';
-                    addLog('❌ VibeQuests API offline - verifique o servidor', 'error');
+                    addLog('❌ VibeQuests API offline', 'error');
                 }
             }
             
@@ -939,188 +911,4 @@
                     const res = await fetch(`${backendUrl}/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token })
-                    });
-                    const data = await res.json();
-                    
-                    if (data.success) {
-                        currentToken = token;
-                        addLog(`✅ Conectado: ${data.user.username}#${data.user.discriminator || '0'}`, 'success');
-                        
-                        document.getElementById('sidebarUserName').innerText = `${data.user.username}#${data.user.discriminator || '0'}`;
-                        document.getElementById('sidebarUserId').innerText = `ID: ${data.user.id}`;
-                        
-                        loginCard.classList.add('hidden');
-                        questsSection.classList.remove('hidden');
-                        sidebarUser.style.display = 'block';
-                        sidebarGuest.style.display = 'none';
-                        
-                        await loadQuests();
-                    } else {
-                        addLog(`❌ Token inválido: ${data.error}`, 'error');
-                    }
-                } catch(e) { addLog(`❌ Erro: ${e.message}`, 'error'); }
-                finally { loadingOverlay.classList.remove('active'); }
-            }
-            
-            async function loadQuests() {
-                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
-                addLog(`🔍 Buscando missões...`, 'info');
-                
-                try {
-                    const res = await fetch(`${backendUrl}/quests/list`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: currentToken })
-                    });
-                    const data = await res.json();
-                    
-                    if (data.success) {
-                        currentQuests = data.quests || [];
-                        renderQuests(currentQuests);
-                        
-                        const available = currentQuests.filter(q => !q.completed).length;
-                        const completed = currentQuests.filter(q => q.completed).length;
-                        document.getElementById('statQuests').innerText = currentQuests.length;
-                        document.getElementById('statCompleted').innerText = completed;
-                        document.getElementById('statPending').innerText = available;
-                        
-                        addLog(`📋 ${currentQuests.length} missões encontradas`, 'success');
-                    } else {
-                        addLog(`❌ Erro: ${data.error}`, 'error');
-                    }
-                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
-            }
-            
-            function renderQuests(quests) {
-                const container = document.getElementById('questsList');
-                
-                if (!quests || quests.length === 0) {
-                    container.innerHTML = '<div class="empty-quests">Nenhuma missão disponível no momento</div>';
-                    lucide.createIcons();
-                    return;
-                }
-                
-                container.innerHTML = '';
-                quests.forEach((quest, index) => {
-                    const percent = quest.target > 0 ? (quest.progress || 0) / quest.target * 100 : 0;
-                    const questImage = getQuestImage(quest.type, quest.id);
-                    const questTypeName = quest.type ? quest.type.replace(/_/g, ' ') : 'MISSÃO';
-                    
-                    const div = document.createElement('div');
-                    div.className = 'quest-item';
-                    div.style.setProperty('--i', index + 1);
-                    div.innerHTML = `
-                        <div class="quest-image" style="background-image: url('${questImage}'); background-size: cover; background-position: center;">
-                            <div class="quest-image-overlay">
-                                <span class="quest-type-badge">${questTypeName}</span>
-                            </div>
-                        </div>
-                        <div class="quest-content">
-                            <div class="quest-header">
-                                <span class="quest-name"><i data-lucide="target"></i> ${escapeHtml(quest.name)}</span>
-                            </div>
-                            <div class="quest-desc">${escapeHtml(quest.description || 'Complete esta missão para ganhar recompensas exclusivas')}</div>
-                            <div class="quest-reward"><i data-lucide="gift"></i> ${quest.reward || 'Recompensa'}</div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
-                            <button class="quest-btn complete-btn" data-id="${quest.id}"><i data-lucide="check-circle"></i> Completar Missão</button>
-                        </div>
-                    `;
-                    container.appendChild(div);
-                });
-                
-                document.querySelectorAll('.complete-btn').forEach(btn => {
-                    btn.addEventListener('click', async (e) => {
-                        const questId = btn.getAttribute('data-id');
-                        await completeQuest(questId);
-                    });
-                });
-                
-                lucide.createIcons();
-            }
-            
-            async function completeQuest(questId) {
-                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
-                addLog(`🎯 Completando missão...`, 'info');
-                loadingOverlay.classList.add('active');
-                
-                try {
-                    const res = await fetch(`${backendUrl}/quests/complete`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: currentToken, questId })
-                    });
-                    const data = await res.json();
-                    
-                    if (data.logs) {
-                        data.logs.forEach(log => addLog(log.message, log.type));
-                    }
-                    
-                    if (data.success) {
-                        addLog(`✨ Missão completada!`, 'success');
-                        await loadQuests();
-                    } else {
-                        addLog(`❌ Falha: ${data.error}`, 'error');
-                    }
-                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
-                finally { loadingOverlay.classList.remove('active'); }
-            }
-            
-            async function completeAllQuests() {
-                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
-                addLog(`🎯 Completando TODAS as missões...`, 'info');
-                loadingOverlay.classList.add('active');
-                
-                try {
-                    const res = await fetch(`${backendUrl}/quests/complete-all`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: currentToken })
-                    });
-                    const data = await res.json();
-                    
-                    if (data.logs) {
-                        data.logs.forEach(log => addLog(log.message, log.type));
-                    }
-                    
-                    if (data.success) {
-                        addLog(`🎉 ${data.completed || 0} missões completadas!`, 'success');
-                        await loadQuests();
-                    } else {
-                        addLog(`❌ Falha: ${data.error}`, 'error');
-                    }
-                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
-                finally { loadingOverlay.classList.remove('active'); }
-            }
-            
-            function logout() {
-                currentToken = '';
-                loginCard.classList.remove('hidden');
-                questsSection.classList.add('hidden');
-                sidebarUser.style.display = 'none';
-                sidebarGuest.style.display = 'block';
-                document.getElementById('token').value = '';
-                document.getElementById('statQuests').innerText = '0';
-                document.getElementById('statCompleted').innerText = '0';
-                document.getElementById('statPending').innerText = '0';
-                addLog(`👋 Desconectado`, 'info');
-            }
-            
-            function escapeHtml(text) {
-                if (!text) return '';
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            }
-            
-            document.getElementById('loginBtn').addEventListener('click', login);
-            document.getElementById('completeAllBtn').addEventListener('click', completeAllQuests);
-            document.getElementById('refreshQuestsBtn').addEventListener('click', loadQuests);
-            document.getElementById('logoutBtn').addEventListener('click', logout);
-            
-            checkBackend();
-            setInterval(checkBackend, 30000);
-        })();
-    </script>
-</body>
-</html>
+                        body: JSON.stringify({
