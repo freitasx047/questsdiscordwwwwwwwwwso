@@ -1,18 +1,14 @@
-// ============================================
-// BACKEND - server.js
-// Discord Quest Completer - Token direto no site
-// ============================================
-
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 
 const X_SUPER_PROPERTIES = 'eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiIiwic3lzdGVtX2xvY2FsZSI6InB0LUJSIiwiaGFzX2NsaWVudF9tb2RzIjpmYWxzZSwiYnJvd3Nlcl91c2VyX2FnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEyMC4wLjAuMCBTYWZhcmkvNTM3LjM2IiwiYnJvd3Nlcl92ZXJzaW9uIjoiMTIwLjAuMC4wIiwib3NfdmVyc2lvbiI6IjEwIiwicmVmZXJyZXIiOiIiLCJyZWZlcnJpbmdfZG9tYWluIjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6OTk5OTk5LCJjbGllbnRfZXZlbnRfc291cmNlIjpudWxsfQ==';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9217 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36';
@@ -23,10 +19,6 @@ function sleep(ms) {
 
 function jitter(baseMs, rangeMs = 1500) {
     return baseMs + Math.floor(Math.random() * rangeMs);
-}
-
-function formatTime(seconds) {
-    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
 }
 
 function getTaskDuration(target) {
@@ -58,13 +50,6 @@ function getBestTask(tasks) {
     return selectedTask;
 }
 
-function createProgressBar(current, total, size = 20) {
-    const pct = Math.min(Math.floor((current / total) * 100), 100);
-    const filled = Math.round((pct / 100) * size);
-    const empty = size - filled;
-    return `[${'█'.repeat(filled)}${'░'.repeat(empty)}] ${pct}%`;
-}
-
 async function discordRequest(token, endpoint, method = 'GET', body = null) {
     try {
         const headers = {
@@ -90,15 +75,15 @@ async function discordRequest(token, endpoint, method = 'GET', body = null) {
     }
 }
 
-// ============================================
-// ENDPOINTS
-// ============================================
-
-app.get('/health', (req, res) => {
+// Health check
+app.get('/api/health', (req, res) => {
+    console.log('✅ Health check chamado');
     res.json({ status: 'online', timestamp: new Date().toISOString() });
 });
 
+// Login
 app.post('/api/login', async (req, res) => {
+    console.log('📝 Login chamado');
     const { token } = req.body;
     if (!token) return res.json({ success: false, error: 'Token obrigatório' });
 
@@ -120,7 +105,9 @@ app.post('/api/login', async (req, res) => {
     });
 });
 
+// List quests
 app.post('/api/quests/list', async (req, res) => {
+    console.log('📋 Listar quests chamado');
     const { token } = req.body;
     if (!token) return res.json({ success: false, error: 'Token obrigatório' });
 
@@ -146,17 +133,22 @@ app.post('/api/quests/list', async (req, res) => {
         quests.push({
             id: quest.id,
             name: quest.config.messages.quest_name,
+            description: quest.config.messages.quest_description || 'Complete esta missão para ganhar recompensas',
             type: selectedTask.taskType,
             target: target,
+            progress: 0,
             reward: rewardText,
-            enrolled: !!quest.user_status?.enrolled_at
+            enrolled: !!quest.user_status?.enrolled_at,
+            completed: false
         });
     }
 
     res.json({ success: true, quests });
 });
 
+// Complete single quest
 app.post('/api/quests/complete', async (req, res) => {
+    console.log('🎯 Complete quest chamado');
     const { token, questId } = req.body;
     if (!token || !questId) {
         return res.json({ success: false, error: 'Token e questId obrigatórios' });
@@ -165,10 +157,10 @@ app.post('/api/quests/complete', async (req, res) => {
     const logs = [];
     const addLog = (msg, type = 'info') => {
         logs.push({ message: msg, type, timestamp: new Date().toISOString() });
+        console.log(msg);
     };
 
     try {
-        // Buscar quest específica
         const questsRes = await discordRequest(token, '/quests/@me', 'GET');
         const quest = questsRes.data?.quests?.find(q => q.id === questId);
         
@@ -191,7 +183,6 @@ app.post('/api/quests/complete', async (req, res) => {
         addLog(`🎯 Iniciando: ${questName}`, 'info');
         addLog(`📋 Tipo: ${taskType} | Duração: ${getTaskDuration(target)}`, 'info');
 
-        // Inscrever na missão se necessário
         if (!quest.user_status?.enrolled_at) {
             addLog(`📝 Inscrevendo na missão...`, 'info');
             await discordRequest(token, `/quests/${questId}/enroll`, 'POST', { location: 11, is_targeted: false, metadata_raw: null });
@@ -219,6 +210,7 @@ app.post('/api/quests/complete', async (req, res) => {
 
                 currentProgress = timestamp;
                 timestamp += 10;
+                addLog(`⏳ Progresso: ${Math.min(currentProgress, target)}/${target} segundos`, 'info');
                 
                 if (currentProgress >= target) break;
                 await sleep(jitter(2500, 2500));
@@ -249,6 +241,7 @@ app.post('/api/quests/complete', async (req, res) => {
                     if (newProgress > currentProgress) {
                         currentProgress = newProgress;
                         stuckCounter = 0;
+                        addLog(`⏳ Progresso: ${Math.min(currentProgress, target)}/${target} ${target > 60 ? 'minutos' : 'segundos'}`, 'info');
                         if (currentProgress >= target) {
                             await discordRequest(token, `/quests/${questId}/heartbeat`, 'POST', { stream_key: streamKey, terminal: true });
                             break;
@@ -266,7 +259,7 @@ app.post('/api/quests/complete', async (req, res) => {
             }
         }
 
-        addLog(`✅ Missão concluída! Recompensa: ${quest.config.rewards_config?.rewards?.[0]?.orb_quantity || 'Recompensa'}`, 'success');
+        addLog(`✅ Missão concluída! Recompensa recebida!`, 'success');
         res.json({ success: true, logs });
 
     } catch (error) {
@@ -275,13 +268,16 @@ app.post('/api/quests/complete', async (req, res) => {
     }
 });
 
+// Complete all quests
 app.post('/api/quests/complete-all', async (req, res) => {
+    console.log('⚡ Complete all chamado');
     const { token } = req.body;
     if (!token) return res.json({ success: false, error: 'Token obrigatório' });
 
     const logs = [];
     const addLog = (msg, type = 'info') => {
         logs.push({ message: msg, type, timestamp: new Date().toISOString() });
+        console.log(msg);
     };
 
     try {
@@ -388,16 +384,25 @@ app.post('/api/quests/complete-all', async (req, res) => {
     }
 });
 
+// Rota principal - serve o index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
-║   🎯 DISCORD QUEST COMPLETER - RODANDO                        ║
+║   🎯 VIBEQUESTS - Servidor Rodando!                           ║
 ║                                                                ║
 ║   🚀 Servidor: http://localhost:${PORT}                        ║
 ║   📡 Status: Online                                           ║
-║                                                                ║
-║   ✅ Cole seu token diretamente no site!                      ║
+║   ✅ API endpoints disponíveis:                               ║
+║      GET  /api/health                                         ║
+║      POST /api/login                                          ║
+║      POST /api/quests/list                                    ║
+║      POST /api/quests/complete                                ║
+║      POST /api/quests/complete-all                            ║
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
     `);
