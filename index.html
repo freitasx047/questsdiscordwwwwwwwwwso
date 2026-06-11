@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kitsun Quests | Dashboard Premium</title>
+    <title>VibeQuests | Dashboard Premium</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,13 +15,13 @@
 
         body {
             font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
-            background: #0a0a0a;
+            background: #000000;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Background com imagem e overlay */
+        /* Background com imagem e overlay amarelo */
         body::before {
             content: '';
             position: fixed;
@@ -29,11 +29,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=2070&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2029&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.08;
+            opacity: 0.06;
             z-index: -2;
         }
 
@@ -44,11 +44,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.95) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, #000000 100%);
             z-index: -1;
         }
 
-        /* Animação das bolinhas caindo */
+        /* Animação das bolinhas caindo - Amarelas */
         .falling-dots {
             position: fixed;
             top: 0;
@@ -64,9 +64,10 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: rgba(255, 255, 255, 0.6);
+            background: #FFD700;
             border-radius: 50%;
             animation: fall linear infinite;
+            box-shadow: 0 0 5px #FFD700;
         }
 
         @keyframes fall {
@@ -86,16 +87,19 @@
             }
         }
 
-        /* Scrollbar personalizada */
+        /* Scrollbar personalizada - Amarela */
         ::-webkit-scrollbar {
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: #000000;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #fff, #888);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
         }
 
         /* Dashboard Layout */
@@ -119,9 +123,9 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(255, 215, 0, 0.15);
             position: fixed;
             left: 0;
             top: 0;
@@ -132,12 +136,13 @@
         }
 
         .sidebar:hover {
-            background: rgba(10, 10, 10, 0.98);
+            background: rgba(0, 0, 0, 0.98);
+            border-right-color: rgba(255, 215, 0, 0.3);
         }
 
         .sidebar-header {
             padding: 30px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
             margin-bottom: 24px;
             animation: slideInLeft 0.5s ease-out;
         }
@@ -161,8 +166,8 @@
         .logo i { 
             width: 38px; 
             height: 38px; 
-            color: #fff;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            color: #FFD700;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
@@ -170,20 +175,22 @@
             50% { transform: scale(1.05); }
         }
         .logo h2 { 
-            font-size: 22px; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, #fff, #aaa);
+            font-size: 24px; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.5px;
         }
         .logo span { 
             font-size: 9px; 
-            color: rgba(255,255,255,0.4); 
+            color: rgba(255, 215, 0, 0.5); 
             display: block; 
             margin-top: 2px;
             letter-spacing: 2px;
+            font-weight: 600;
         }
 
         .nav-menu { padding: 0 16px; }
@@ -194,7 +201,7 @@
             padding: 12px 16px;
             margin-bottom: 8px;
             border-radius: 14px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             font-family: 'Inter', sans-serif;
@@ -202,15 +209,15 @@
         }
         .nav-item i { width: 20px; height: 20px; }
         .nav-item:hover { 
-            background: rgba(255,255,255,0.08); 
-            color: #fff;
+            background: rgba(255, 215, 0, 0.1); 
+            color: #FFD700;
             transform: translateX(5px);
         }
         .nav-item.active { 
-            background: rgba(255,255,255,0.12); 
-            color: #fff;
-            border-left: 3px solid #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: rgba(255, 215, 0, 0.15); 
+            color: #FFD700;
+            border-left: 3px solid #FFD700;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
         }
 
         /* Main Content */
@@ -238,20 +245,21 @@
             align-items: center;
             margin-bottom: 32px;
             padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
         }
         .page-title h1 { 
-            font-size: 28px; 
-            font-weight: 800; 
-            background: linear-gradient(135deg, #fff, #ccc);
+            font-size: 32px; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             font-family: 'Montserrat', sans-serif;
+            letter-spacing: -1px;
         }
         .page-title p { 
             font-size: 13px; 
-            color: rgba(255,255,255,0.5); 
+            color: rgba(255, 215, 0, 0.6); 
             margin-top: 4px;
             font-family: 'Inter', sans-serif;
         }
@@ -259,16 +267,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             padding: 8px 20px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             animation: glow 2s infinite;
         }
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); border-color: rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); border-color: rgba(255, 215, 0, 0.6); }
         }
         .status-dot {
             width: 8px;
@@ -278,13 +286,17 @@
             transition: all 0.3s;
         }
         .status-dot.online { 
-            background: #fff; 
-            box-shadow: 0 0 10px #fff;
+            background: #FFD700; 
+            box-shadow: 0 0 10px #FFD700;
             animation: blink 1.5s infinite;
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
+        }
+        .status-badge span {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
         }
 
         /* Stats Cards */
@@ -295,9 +307,9 @@
             margin-bottom: 32px;
         }
         .stat-card {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             border-radius: 20px;
             padding: 24px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -307,31 +319,31 @@
         .stat-card:nth-child(2) { animation-delay: 0.2s; }
         .stat-card:nth-child(3) { animation-delay: 0.3s; }
         .stat-card:hover { 
-            border-color: rgba(255,255,255,0.2); 
+            border-color: rgba(255, 215, 0, 0.4); 
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
         }
         .stat-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
         }
-        .stat-icon i { width: 24px; height: 24px; color: #fff; }
+        .stat-icon i { width: 24px; height: 24px; color: #FFD700; }
         .stat-value { 
             font-size: 32px; 
             font-weight: 800; 
-            color: #fff; 
+            color: #FFFFFF; 
             margin-bottom: 4px;
             font-family: 'Montserrat', sans-serif;
         }
         .stat-label { 
             font-size: 11px; 
-            color: rgba(255,255,255,0.5); 
+            color: rgba(255, 215, 0, 0.6); 
             text-transform: uppercase; 
             letter-spacing: 1.5px;
             font-family: 'Inter', sans-serif;
@@ -340,16 +352,17 @@
 
         /* Token Card */
         .token-card {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             border-radius: 24px;
             padding: 28px;
             margin-bottom: 24px;
             transition: all 0.3s;
         }
         .token-card:hover {
-            border-color: rgba(255,255,255,0.15);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.05);
         }
         .token-label {
             display: flex;
@@ -358,18 +371,18 @@
             margin-bottom: 12px;
             font-size: 12px;
             font-weight: 700;
-            color: rgba(255,255,255,0.6);
+            color: #FFD700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
         .token-label i { width: 16px; height: 16px; }
         .token-input {
             width: 100%;
             padding: 14px 16px;
             background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 14px;
-            color: #fff;
+            color: #FFFFFF;
             font-family: 'Inter', monospace;
             font-size: 13px;
             resize: vertical;
@@ -378,14 +391,14 @@
         }
         .token-input:focus { 
             outline: none; 
-            border-color: rgba(255,255,255,0.4);
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
         .btn-primary {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #fff, #ddd);
-            color: #000;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000000;
             border: none;
             border-radius: 14px;
             font-size: 14px;
@@ -400,11 +413,22 @@
         }
         .btn-primary:hover { 
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
-        .btn-secondary { background: linear-gradient(135deg, #1a1a1a, #0a0a0a); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
-        .btn-secondary:hover { background: linear-gradient(135deg, #2a2a2a, #1a1a1a); }
-        .btn-success { background: linear-gradient(135deg, #fff, #e0e0e0); color: #000; }
+        .btn-secondary { 
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a); 
+            color: #FFD700; 
+            border: 1px solid rgba(255, 215, 0, 0.3); 
+        }
+        .btn-secondary:hover { 
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a); 
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        }
+        .btn-success { 
+            background: linear-gradient(135deg, #FFD700, #FFA500); 
+            color: #000000;
+            font-weight: 800;
+        }
 
         /* Quests Section */
         .section-title {
@@ -416,7 +440,7 @@
         .section-title h3 { 
             font-size: 20px; 
             font-weight: 700; 
-            color: #fff; 
+            color: #FFD700; 
             display: flex; 
             align-items: center; 
             gap: 10px;
@@ -432,9 +456,9 @@
         }
 
         .quest-item {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -442,9 +466,9 @@
         }
         .quest-item:nth-child(n) { animation-delay: calc(0.05s * var(--i, 1)); }
         .quest-item:hover { 
-            border-color: rgba(255,255,255,0.2); 
+            border-color: #FFD700; 
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15);
         }
         @keyframes scaleIn {
             from {
@@ -479,14 +503,15 @@
         .quest-type-badge {
             display: inline-block;
             padding: 6px 14px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 215, 0, 0.2);
             backdrop-filter: blur(8px);
             border-radius: 30px;
             font-size: 10px;
-            color: #fff;
+            color: #FFD700;
             font-weight: 700;
             letter-spacing: 1px;
             font-family: 'Inter', sans-serif;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .quest-content {
@@ -500,17 +525,17 @@
         }
         .quest-name {
             font-weight: 700;
-            color: #fff;
+            color: #FFFFFF;
             font-size: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
             font-family: 'Montserrat', sans-serif;
         }
-        .quest-name i { width: 16px; height: 16px; color: rgba(255,255,255,0.6); }
+        .quest-name i { width: 16px; height: 16px; color: #FFD700; }
         .quest-desc {
             font-size: 12px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 14px;
             line-height: 1.5;
             font-family: 'Inter', sans-serif;
@@ -520,23 +545,23 @@
             align-items: center;
             gap: 6px;
             font-size: 12px;
-            color: #fff;
+            color: #FFD700;
             margin-bottom: 14px;
             padding: 8px 12px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 215, 0, 0.1);
             border-radius: 10px;
             font-weight: 600;
         }
-        .quest-reward i { width: 14px; height: 14px; color: #fff; }
+        .quest-reward i { width: 14px; height: 14px; color: #FFD700; }
         .progress-bar {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 215, 0, 0.15);
             border-radius: 10px;
             height: 6px;
             margin: 14px 0;
             overflow: hidden;
         }
         .progress-fill {
-            background: linear-gradient(90deg, #fff, #aaa);
+            background: linear-gradient(90deg, #FFD700, #FFA500);
             height: 100%;
             width: 0%;
             transition: width 0.5s ease;
@@ -551,10 +576,10 @@
         .quest-btn {
             width: 100%;
             padding: 12px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 12px;
-            color: #fff;
+            color: #FFD700;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
@@ -566,15 +591,17 @@
             font-family: 'Inter', sans-serif;
         }
         .quest-btn:hover { 
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
             transform: scale(1.02);
+            color: #FFD700;
         }
 
         /* Console */
         .console {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.15);
             border-radius: 20px;
             margin-top: 32px;
             overflow: hidden;
@@ -584,7 +611,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
         }
         .console-header span {
             display: flex;
@@ -592,7 +619,7 @@
             gap: 8px;
             font-size: 12px;
             font-weight: 700;
-            color: rgba(255,255,255,0.6);
+            color: #FFD700;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -606,7 +633,7 @@
         }
         .log-entry {
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.05);
             display: flex;
             gap: 12px;
             animation: slideIn 0.3s ease-out;
@@ -621,15 +648,15 @@
                 transform: translateX(0);
             }
         }
-        .log-time { color: rgba(255,255,255,0.4); min-width: 80px; font-size: 11px; }
+        .log-time { color: rgba(255, 215, 0, 0.5); min-width: 80px; font-size: 11px; }
         .log-error { color: #ff8888; }
-        .log-success { color: #fff; font-weight: 600; }
-        .log-info { color: rgba(255,255,255,0.6); }
+        .log-success { color: #FFD700; font-weight: 600; }
+        .log-info { color: rgba(255, 255, 255, 0.6); }
 
         .empty-quests {
             text-align: center;
             padding: 60px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 215, 0, 0.5);
             font-family: 'Inter', sans-serif;
         }
         .hidden { display: none !important; }
@@ -641,8 +668,8 @@
             left: 0;
             right: 0;
             padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            background: rgba(0, 0, 0, 0.95);
         }
         .user-avatar-sidebar {
             display: flex;
@@ -654,21 +681,22 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
-        .avatar-icon i { width: 22px; height: 22px; color: #fff; }
-        .user-name-sidebar { font-size: 14px; font-weight: 600; color: #fff; font-family: 'Inter', sans-serif; }
-        .user-id-sidebar { font-size: 10px; color: rgba(255,255,255,0.4); }
+        .avatar-icon i { width: 22px; height: 22px; color: #FFD700; }
+        .user-name-sidebar { font-size: 14px; font-weight: 600; color: #FFFFFF; font-family: 'Inter', sans-serif; }
+        .user-id-sidebar { font-size: 10px; color: rgba(255, 215, 0, 0.5); }
         .logout-btn {
             width: 100%;
             padding: 10px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 12px;
-            color: #ff8888;
+            color: #FFD700;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -679,7 +707,8 @@
             transition: all 0.3s;
         }
         .logout-btn:hover { 
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
             transform: scale(1.02);
         }
 
@@ -701,13 +730,18 @@
         .spinner {
             width: 60px;
             height: 60px;
-            border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: #fff;
+            border: 3px solid rgba(255, 215, 0, 0.2);
+            border-top-color: #FFD700;
             border-radius: 50%;
             animation: spin 0.8s infinite linear;
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+        .loading-overlay div {
+            color: #FFD700;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
 
         @media (max-width: 900px) {
@@ -724,8 +758,8 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <i data-lucide="fox"></i>
-                    <div><h2>KITSUN</h2><span>QUESTS v5.0</span></div>
+                    <i data-lucide="zap"></i>
+                    <div><h2>VIBEQUESTS</h2><span>PREMIUM DASHBOARD</span></div>
                 </div>
             </div>
             <div class="nav-menu">
@@ -759,8 +793,8 @@
         <div class="main-content">
             <div class="main-header">
                 <div class="page-title">
-                    <h1>Dashboard</h1>
-                    <p>Gerencie suas missões do Discord</p>
+                    <h1>VibeQuests</h1>
+                    <p>Gerencie suas missões do Discord com estilo</p>
                 </div>
                 <div class="status-badge">
                     <div class="status-dot" id="statusDot"></div>
@@ -798,7 +832,7 @@
             <div class="console">
                 <div class="console-header"><span><i data-lucide="terminal"></i> Console</span><span id="logCounter">0</span></div>
                 <div class="console-logs" id="consoleLogs">
-                    <div class="log-entry"><span class="log-time">───</span><span class="log-info">Kitsun Quests iniciado</span></div>
+                    <div class="log-entry"><span class="log-time">───</span><span class="log-info">VibeQuests iniciado</span></div>
                 </div>
             </div>
         </div>
@@ -807,25 +841,25 @@
     <!-- Loading -->
     <div class="loading-overlay" id="loadingOverlay" style="display: none;">
         <div class="spinner"></div>
-        <div style="color:#fff; font-family: 'Inter', sans-serif;">Processando...</div>
+        <div>Processando...</div>
     </div>
 
     <script>
-        // Gerar bolinhas caindo
+        // Gerar bolinhas caindo amarelas
         function createFallingDots() {
             const container = document.getElementById('fallingDots');
-            const numberOfDots = 100;
+            const numberOfDots = 120;
             
             for (let i = 0; i < numberOfDots; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 5 + 2;
                 dot.style.width = `${size}px`;
                 dot.style.height = `${size}px`;
                 dot.style.left = `${Math.random() * 100}%`;
-                dot.style.animationDuration = `${Math.random() * 8 + 4}s`;
-                dot.style.animationDelay = `${Math.random() * 10}s`;
-                dot.style.opacity = Math.random() * 0.5 + 0.2;
+                dot.style.animationDuration = `${Math.random() * 10 + 4}s`;
+                dot.style.animationDelay = `${Math.random() * 15}s`;
+                dot.style.opacity = Math.random() * 0.6 + 0.2;
                 container.appendChild(dot);
             }
         }
@@ -885,12 +919,12 @@
                     if (res.ok) {
                         statusDot.classList.add('online');
                         statusText.innerText = 'API Online';
-                        addLog('✅ Kitsun API conectada', 'success');
+                        addLog('✅ VibeQuests API conectada', 'success');
                     } else throw new Error();
                 } catch(e) {
                     statusDot.classList.remove('online');
                     statusText.innerText = 'API Offline';
-                    addLog('❌ Kitsun API offline - verifique o servidor', 'error');
+                    addLog('❌ VibeQuests API offline - verifique o servidor', 'error');
                 }
             }
             
