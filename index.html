@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeQuests | Dashboard Premium</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,7 +21,6 @@
             position: relative;
         }
 
-        /* Background com imagem */
         .bg-image {
             position: fixed;
             top: 0;
@@ -32,7 +31,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.15;
+            opacity: 0.12;
             z-index: -2;
         }
 
@@ -42,11 +41,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.7) 0%, #000000 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, #000000 100%);
             z-index: -1;
         }
 
-        /* Animação das bolinhas caindo - Amarelas */
         .falling-dots {
             position: fixed;
             top: 0;
@@ -69,35 +67,16 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #FFD700;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
 
-        /* Dashboard Layout */
         .dashboard {
             display: flex;
             min-height: 100vh;
@@ -107,17 +86,10 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Sidebar */
         .sidebar {
             width: 280px;
             background: rgba(0, 0, 0, 0.95);
@@ -129,25 +101,12 @@
             bottom: 0;
             z-index: 10;
             overflow-y: auto;
-            transition: all 0.3s;
         }
 
         .sidebar-header {
             padding: 30px 24px;
             border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             margin-bottom: 24px;
-            animation: slideInLeft 0.5s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .logo {
@@ -194,7 +153,6 @@
             color: rgba(255, 255, 255, 0.6);
             transition: all 0.3s;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
             font-weight: 500;
         }
         .nav-item i { width: 20px; height: 20px; }
@@ -209,7 +167,6 @@
             border-left: 3px solid #FFD700;
         }
 
-        /* Main Content */
         .main-content {
             flex: 1;
             margin-left: 280px;
@@ -218,14 +175,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .main-header {
@@ -282,7 +233,6 @@
             50% { opacity: 0.5; }
         }
 
-        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -332,7 +282,6 @@
             font-weight: 600;
         }
 
-        /* Token Card */
         .token-card {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -342,9 +291,7 @@
             margin-bottom: 24px;
             transition: all 0.3s;
         }
-        .token-card:hover {
-            border-color: #FFD700;
-        }
+        .token-card:hover { border-color: #FFD700; }
         .token-label {
             display: flex;
             align-items: center;
@@ -368,7 +315,6 @@
             font-size: 13px;
             resize: vertical;
             margin-bottom: 16px;
-            transition: all 0.3s;
         }
         .token-input:focus { 
             outline: none; 
@@ -400,15 +346,9 @@
             color: #FFD700; 
             border: 1px solid rgba(255, 215, 0, 0.3); 
         }
-        .btn-secondary:hover { 
-            background: rgba(255, 215, 0, 0.2);
-        }
-        .btn-success { 
-            background: linear-gradient(135deg, #FFD700, #FFA500); 
-            color: #000000;
-        }
+        .btn-secondary:hover { background: rgba(255, 215, 0, 0.2); }
+        .btn-success { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000000; }
 
-        /* Quests Section */
         .section-title {
             display: flex;
             justify-content: space-between;
@@ -448,14 +388,8 @@
             box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15);
         }
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .quest-image {
@@ -466,9 +400,7 @@
             position: relative;
             transition: transform 0.5s ease;
         }
-        .quest-item:hover .quest-image {
-            transform: scale(1.05);
-        }
+        .quest-item:hover .quest-image { transform: scale(1.05); }
         .quest-image-overlay {
             position: absolute;
             bottom: 0;
@@ -490,9 +422,7 @@
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
-        .quest-content {
-            padding: 20px;
-        }
+        .quest-content { padding: 20px; }
         .quest-header {
             display: flex;
             justify-content: space-between;
@@ -563,7 +493,6 @@
             border-color: #FFD700;
         }
 
-        /* Console */
         .console {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
@@ -605,14 +534,8 @@
             animation: slideIn 0.3s ease-out;
         }
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         .log-time { color: rgba(255, 215, 0, 0.5); min-width: 80px; font-size: 11px; }
         .log-error { color: #ff8888; }
@@ -626,7 +549,6 @@
         }
         .hidden { display: none !important; }
 
-        /* User Sidebar */
         .user-info-sidebar {
             position: absolute;
             bottom: 0;
@@ -671,11 +593,8 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        .logout-btn:hover { 
-            background: rgba(255, 215, 0, 0.2);
-        }
+        .logout-btn:hover { background: rgba(255, 215, 0, 0.2); }
 
-        /* Loading */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -691,9 +610,7 @@
             gap: 20px;
             display: none;
         }
-        .loading-overlay.active {
-            display: flex;
-        }
+        .loading-overlay.active { display: flex; }
         .spinner {
             width: 60px;
             height: 60px;
@@ -702,13 +619,8 @@
             border-radius: 50%;
             animation: spin 0.8s infinite linear;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .loading-overlay div {
-            color: #FFD700;
-            font-weight: 600;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-overlay div { color: #FFD700; font-weight: 600; }
 
         @media (max-width: 900px) {
             .sidebar { transform: translateX(-100%); }
@@ -717,13 +629,11 @@
     </style>
 </head>
 <body>
-    <!-- Background -->
     <div class="bg-image"></div>
     <div class="bg-overlay"></div>
     <div class="falling-dots" id="fallingDots"></div>
 
     <div class="dashboard">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
@@ -761,7 +671,6 @@
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="main-header">
                 <div class="page-title">
@@ -774,21 +683,18 @@
                 </div>
             </div>
 
-            <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-icon"><i data-lucide="trophy"></i></div><div class="stat-value" id="statQuests">0</div><div class="stat-label">Missões</div></div>
                 <div class="stat-card"><div class="stat-icon"><i data-lucide="check-circle"></i></div><div class="stat-value" id="statCompleted">0</div><div class="stat-label">Completadas</div></div>
                 <div class="stat-card"><div class="stat-icon"><i data-lucide="clock"></i></div><div class="stat-value" id="statPending">0</div><div class="stat-label">Pendentes</div></div>
             </div>
 
-            <!-- Login -->
             <div class="token-card" id="loginCard">
                 <div class="token-label"><i data-lucide="key"></i> Token do Discord</div>
                 <textarea class="token-input" id="token" rows="2" placeholder="Cole seu token aqui..."></textarea>
                 <button class="btn-primary" id="loginBtn"><i data-lucide="log-in"></i> Conectar Conta</button>
             </div>
 
-            <!-- Quests -->
             <div id="questsSection" class="hidden">
                 <div class="section-title">
                     <h3><i data-lucide="trophy"></i> Missões Disponíveis</h3>
@@ -800,7 +706,6 @@
                 <button class="btn-primary btn-success" id="completeAllBtn" style="margin-top: 24px;"><i data-lucide="zap"></i> COMPLETAR TODAS MISSÕES</button>
             </div>
 
-            <!-- Console -->
             <div class="console">
                 <div class="console-header"><span><i data-lucide="terminal"></i> Console</span><span id="logCounter">0</span></div>
                 <div class="console-logs" id="consoleLogs">
@@ -810,24 +715,19 @@
         </div>
     </div>
 
-    <!-- Loading -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div>Processando...</div>
     </div>
 
     <script>
-        // Gerar bolinhas caindo
         function createFallingDots() {
             const container = document.getElementById('fallingDots');
-            const numberOfDots = 150;
-            
-            for (let i = 0; i < numberOfDots; i++) {
+            for (let i = 0; i < 150; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
-                const size = Math.random() * 4 + 2;
-                dot.style.width = `${size}px`;
-                dot.style.height = `${size}px`;
+                dot.style.width = `${Math.random() * 4 + 2}px`;
+                dot.style.height = dot.style.width;
                 dot.style.left = `${Math.random() * 100}%`;
                 dot.style.animationDuration = `${Math.random() * 8 + 4}s`;
                 dot.style.animationDelay = `${Math.random() * 10}s`;
@@ -835,16 +735,16 @@
                 container.appendChild(dot);
             }
         }
-        
         createFallingDots();
-        
+
         (function() {
             lucide.createIcons();
             
             let logCount = 0;
             let currentToken = '';
             let currentQuests = [];
-            const backendUrl = '/api';
+            // PEGA A URL DO BACKEND AUTOMATICAMENTE
+            const backendUrl = window.location.origin + '/api';
             
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
@@ -896,7 +796,7 @@
                 } catch(e) {
                     statusDot.classList.remove('online');
                     statusText.innerText = 'API Offline';
-                    addLog('❌ VibeQuests API offline', 'error');
+                    addLog('❌ VibeQuests API offline - Certifique-se que o server.js está rodando', 'error');
                 }
             }
             
@@ -911,4 +811,188 @@
                     const res = await fetch(`${backendUrl}/login`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
+                        body: JSON.stringify({ token })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.success) {
+                        currentToken = token;
+                        addLog(`✅ Conectado: ${data.user.username}#${data.user.discriminator || '0'}`, 'success');
+                        
+                        document.getElementById('sidebarUserName').innerText = `${data.user.username}#${data.user.discriminator || '0'}`;
+                        document.getElementById('sidebarUserId').innerText = `ID: ${data.user.id}`;
+                        
+                        loginCard.classList.add('hidden');
+                        questsSection.classList.remove('hidden');
+                        sidebarUser.style.display = 'block';
+                        sidebarGuest.style.display = 'none';
+                        
+                        await loadQuests();
+                    } else {
+                        addLog(`❌ Token inválido: ${data.error}`, 'error');
+                    }
+                } catch(e) { addLog(`❌ Erro: ${e.message}`, 'error'); }
+                finally { loadingOverlay.classList.remove('active'); }
+            }
+            
+            async function loadQuests() {
+                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
+                addLog(`🔍 Buscando missões...`, 'info');
+                
+                try {
+                    const res = await fetch(`${backendUrl}/quests/list`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: currentToken })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.success) {
+                        currentQuests = data.quests || [];
+                        renderQuests(currentQuests);
+                        
+                        const available = currentQuests.filter(q => !q.completed).length;
+                        const completed = currentQuests.filter(q => q.completed).length;
+                        document.getElementById('statQuests').innerText = currentQuests.length;
+                        document.getElementById('statCompleted').innerText = completed;
+                        document.getElementById('statPending').innerText = available;
+                        
+                        addLog(`📋 ${currentQuests.length} missões encontradas`, 'success');
+                    } else {
+                        addLog(`❌ Erro: ${data.error}`, 'error');
+                    }
+                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
+            }
+            
+            function renderQuests(quests) {
+                const container = document.getElementById('questsList');
+                
+                if (!quests || quests.length === 0) {
+                    container.innerHTML = '<div class="empty-quests">Nenhuma missão disponível no momento</div>';
+                    lucide.createIcons();
+                    return;
+                }
+                
+                container.innerHTML = '';
+                quests.forEach((quest, index) => {
+                    const percent = quest.target > 0 ? (quest.progress || 0) / quest.target * 100 : 0;
+                    const questImage = getQuestImage(quest.type, quest.id);
+                    const questTypeName = quest.type ? quest.type.replace(/_/g, ' ') : 'MISSÃO';
+                    
+                    const div = document.createElement('div');
+                    div.className = 'quest-item';
+                    div.style.setProperty('--i', index + 1);
+                    div.innerHTML = `
+                        <div class="quest-image" style="background-image: url('${questImage}');">
+                            <div class="quest-image-overlay">
+                                <span class="quest-type-badge">${questTypeName}</span>
+                            </div>
+                        </div>
+                        <div class="quest-content">
+                            <div class="quest-header">
+                                <span class="quest-name"><i data-lucide="target"></i> ${escapeHtml(quest.name)}</span>
+                            </div>
+                            <div class="quest-desc">${escapeHtml(quest.description || 'Complete esta missão para ganhar recompensas exclusivas')}</div>
+                            <div class="quest-reward"><i data-lucide="gift"></i> ${quest.reward || 'Recompensa'}</div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%"></div></div>
+                            <button class="quest-btn complete-btn" data-id="${quest.id}"><i data-lucide="check-circle"></i> Completar Missão</button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                document.querySelectorAll('.complete-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const questId = btn.getAttribute('data-id');
+                        await completeQuest(questId);
+                    });
+                });
+                
+                lucide.createIcons();
+            }
+            
+            async function completeQuest(questId) {
+                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
+                addLog(`🎯 Completando missão...`, 'info');
+                loadingOverlay.classList.add('active');
+                
+                try {
+                    const res = await fetch(`${backendUrl}/quests/complete`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: currentToken, questId })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.logs) {
+                        data.logs.forEach(log => addLog(log.message, log.type));
+                    }
+                    
+                    if (data.success) {
+                        addLog(`✨ Missão completada!`, 'success');
+                        await loadQuests();
+                    } else {
+                        addLog(`❌ Falha: ${data.error}`, 'error');
+                    }
+                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
+                finally { loadingOverlay.classList.remove('active'); }
+            }
+            
+            async function completeAllQuests() {
+                if (!currentToken) { addLog('❌ Conecte uma conta primeiro', 'error'); return; }
+                addLog(`🎯 Completando TODAS as missões...`, 'info');
+                loadingOverlay.classList.add('active');
+                
+                try {
+                    const res = await fetch(`${backendUrl}/quests/complete-all`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: currentToken })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.logs) {
+                        data.logs.forEach(log => addLog(log.message, log.type));
+                    }
+                    
+                    if (data.success) {
+                        addLog(`🎉 ${data.completed || 0} missões completadas!`, 'success');
+                        await loadQuests();
+                    } else {
+                        addLog(`❌ Falha: ${data.error}`, 'error');
+                    }
+                } catch(e) { addLog(`❌ ${e.message}`, 'error'); }
+                finally { loadingOverlay.classList.remove('active'); }
+            }
+            
+            function logout() {
+                currentToken = '';
+                loginCard.classList.remove('hidden');
+                questsSection.classList.add('hidden');
+                sidebarUser.style.display = 'none';
+                sidebarGuest.style.display = 'block';
+                document.getElementById('token').value = '';
+                document.getElementById('statQuests').innerText = '0';
+                document.getElementById('statCompleted').innerText = '0';
+                document.getElementById('statPending').innerText = '0';
+                addLog(`👋 Desconectado`, 'info');
+            }
+            
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('completeAllBtn').addEventListener('click', completeAllQuests);
+            document.getElementById('refreshQuestsBtn').addEventListener('click', loadQuests);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            checkBackend();
+            setInterval(checkBackend, 30000);
+        })();
+    </script>
+</body>
+</html>
